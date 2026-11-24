@@ -26,8 +26,12 @@ jobs:
       - name: Generate Upload Key & Build Signed Release APK
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null 2>&1 || true
-          keytool -genkey -v -keystore my-upload-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload -storepass android -keypass android -dname "CN=RabbitAI, OU=Dev, O=Rabbit, L=Alexandria, S=Alexandria, C=EG"
-          gradle assembleRelease
+          keytool -genkey -v -keystore "$GITHUB_WORKSPACE/my-upload-key.jks" -keyalg RSA -keysize 2048 -validity 10000 -alias upload -storepass android -keypass android -dname "CN=RabbitAI, OU=Dev, O=Rabbit, L=Alexandria, S=Alexandria, C=EG"
+          gradle assembleRelease \
+            -Pandroid.injected.signing.store.file="$GITHUB_WORKSPACE/my-upload-key.jks" \
+            -Pandroid.injected.signing.store.password=android \
+            -Pandroid.injected.signing.key.alias=upload \
+            -Pandroid.injected.signing.key.password=android
 
       - name: Upload Ready APK
         uses: actions/upload-artifact@v4
