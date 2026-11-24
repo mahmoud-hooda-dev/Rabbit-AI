@@ -18,14 +18,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Install Gradle and Build Release APK
+        run: |
+          wget -q https://gradle.org
+          unzip -q gradle-8.7-bin.zip -d /opt/gradle
+          export PATH=$PATH:/opt/gradle/gradle-8.7/bin
+          gradle assembleRelease
+
       - name: Generate Signing Key
         run: |
           keytool -genkey -v -keystore release.jks -keyalg RSA -keysize 2048 -validity 10000 -alias rabbit -storepass rabbit123 -keypass rabbit123 -dname "CN=RabbitAI, OU=Dev, O=Rabbit, L=Alexandria, S=Alexandria, C=EG"
-
-      - name: Build Release APK
-        run: |
-          chmod +x gradlew || true
-          ./gradlew assembleRelease
 
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
