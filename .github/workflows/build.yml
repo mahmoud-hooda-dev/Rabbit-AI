@@ -23,27 +23,14 @@ jobs:
         with:
           gradle-version: '9.3.1'
 
-      - name: Accept Android SDK Licenses & Build APK
+      - name: Generate Upload Key & Build Signed Release APK
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null 2>&1 || true
+          keytool -genkey -v -keystore my-upload-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload -storepass android -keypass android -dname "CN=RabbitAI, OU=Dev, O=Rabbit, L=Alexandria, S=Alexandria, C=EG"
           gradle assembleRelease
-
-      - name: Generate Signing Key
-        run: |
-          keytool -genkey -v -keystore release.jks -keyalg RSA -keysize 2048 -validity 10000 -alias rabbit -storepass rabbit123 -keypass rabbit123 -dname "CN=RabbitAI, OU=Dev, O=Rabbit, L=Alexandria, S=Alexandria, C=EG"
-
-      - name: Sign APK
-        uses: r0adkll/sign-android-release@v1
-        id: sign_app
-        with:
-          releaseDirectory: app/build/outputs/apk/release
-          signingKey: release.jks
-          alias: rabbit
-          keyStorePassword: rabbit123
-          keyPassword: rabbit123
 
       - name: Upload Ready APK
         uses: actions/upload-artifact@v4
         with:
           name: RabbitAI-SamsungStore-APK
-          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
+          path: app/build/outputs/apk/release/*.apk
