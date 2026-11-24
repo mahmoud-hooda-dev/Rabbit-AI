@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="260dp"
+    android:height="260dp"
+    android:viewportWidth="260"
+    android:viewportHeight="260">
+
+    <!-- Clean Ribbon Rabbit Outline matching reference icon (cyan top-right -> electric blue -> violet curl) -->
+    <path
+        android:strokeWidth="12"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"
+        android:pathData="M 80,160 C 84,156 95,148 116,146 C 126,156 137,170 137,192 C 126,204 112,216 88,218 C 72,209 52,195 45,170 C 53,152 64,126 86,116 C 118,116 136,122 168,119 C 158,117 145,114 135,108 C 116,84 100,58 96,39 C 122,58 165,90 200,117 C 212,126 220,132 218,138 C 215,147 205,155 188,157 C 168,160 154,163 146,177 C 141,185 143,197 157,205">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="140.0"
+                android:startY="45.0"
+                android:endX="65.0"
+                android:endY="210.0"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#FF12E8C8" />
+                <item android:offset="0.48" android:color="#FF2B9CFF" />
+                <item android:offset="0.82" android:color="#FF7C4DFF" />
+                <item android:offset="1.0" android:color="#FF9F4BFF" />
+            </gradient>
+        </aapt:attr>
+    </path>
+</vector>

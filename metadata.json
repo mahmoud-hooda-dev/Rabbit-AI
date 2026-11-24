@@ -1,0 +1,6 @@
+{
+  "name": "Rabbit AI",
+  "description": "Principal Enterprise AI System for Rabbit Mobility Egypt: advanced micro-mobility telematics diagnostics, fleet logistics, Cairo/Giza smart geofence routing, and sustainability auditing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
